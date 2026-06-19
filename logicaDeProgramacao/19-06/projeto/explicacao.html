@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atividade Prática — Catálogo da Loja de Games (Objetos em JavaScript)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Lexend:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --pagina: #ece8f3;
+            --card: #fcfbff;
+            --creme: #f1edfa;
+            --tinta: #2b2536;
+            --tinta-forte: #1c1726;
+            --eyebrow: #615a72;
+            --acento: #7c3aed;
+            --borda: #d6cbf0;
+            --borda-suave: #e7e1f5;
+            --code-bg: #1e1830;
+            --code-fg: #e6e0f3;
+            --code-borda: #2a2240;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            margin: 0;
+            background: var(--pagina);
+            color: var(--tinta);
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.65;
+            padding: 48px 20px 80px;
+        }
+
+        .wrap {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            font-family: 'Lexend', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--acento);
+            margin: 0 0 14px;
+        }
+
+        .titulo {
+            font-family: 'Newsreader', Georgia, serif;
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 1.12;
+            letter-spacing: -.01em;
+            color: var(--tinta-forte);
+            margin: 0 0 16px;
+            max-width: 22ch;
+        }
+
+        .subtitulo {
+            font-size: 19px;
+            color: var(--eyebrow);
+            margin: 0 0 8px;
+            max-width: 62ch;
+        }
+
+        .meta {
+            font-family: 'Lexend', sans-serif;
+            font-size: 13px;
+            color: var(--eyebrow);
+            margin: 18px 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+        }
+
+        .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .meta b {
+            color: var(--tinta);
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(40, 20, 80, .04), 0 6px 24px rgba(40, 20, 80, .07);
+            padding: 34px 40px;
+            margin: 22px 0;
+        }
+
+        .card h2 {
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--eyebrow);
+            margin: 0 0 18px;
+            padding-bottom: 14px;
+            border-bottom: 1.5px solid var(--borda-suave);
+        }
+
+        .card h2 .n {
+            color: var(--acento);
+            margin-right: 8px;
+        }
+
+        .card p {
+            margin: 0 0 14px;
+            max-width: 66ch;
+            color: var(--tinta);
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        strong {
+            color: var(--tinta-forte);
+            font-weight: 600;
+        }
+
+        code.inl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .86em;
+            background: var(--creme);
+            border: 1px solid var(--borda);
+            border-radius: 5px;
+            padding: 1px 6px;
+            color: #6d28d9;
+        }
+
+        /* cenário em destaque */
+        .cenario {
+            background: var(--creme);
+            border: 1px solid var(--borda);
+        }
+
+        .cenario .cliente {
+            font-family: 'Lexend', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--acento);
+            letter-spacing: .04em;
+            margin: 0 0 10px;
+        }
+
+        /* badges de conceito */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 0;
+        }
+
+        .badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            background: #fff;
+            border: 1px solid var(--borda);
+            border-radius: 999px;
+            padding: 5px 12px;
+            color: #6d28d9;
+        }
+
+        /* lista simples */
+        ul.lista {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        ul.lista li {
+            margin-bottom: 9px;
+            color: var(--tinta);
+            max-width: 64ch;
+        }
+
+        ul.lista li::marker {
+            color: var(--acento);
+        }
+
+        /* etapa */
+        .etapa {
+            display: grid;
+            grid-template-columns: 46px 1fr;
+            gap: 20px;
+            align-items: start;
+            padding: 24px 0;
+            border-top: 1px solid var(--borda-suave);
+        }
+
+        .etapa:first-of-type {
+            border-top: none;
+            padding-top: 4px;
+        }
+
+        .etapa .num {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--acento);
+            color: #fff;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .etapa h3 {
+            font-family: 'Newsreader', serif;
+            font-weight: 600;
+            font-size: 21px;
+            color: var(--tinta-forte);
+            margin: 4px 0 8px;
+            line-height: 1.2;
+        }
+
+        .etapa p {
+            margin: 0 0 10px;
+        }
+
+        .etapa ul.lista {
+            margin-bottom: 12px;
+        }
+
+        .etapa .min {
+            min-width: 0;
+        }
+
+        /* bloco de código / saída */
+        pre.code {
+            margin: 14px 0 0;
+            background: var(--code-bg);
+            color: var(--code-fg);
+            border: 1px solid var(--code-borda);
+            border-radius: 10px;
+            padding: 18px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            overflow-x: auto;
+            white-space: pre;
+            font-variant-ligatures: none;
+        }
+
+        pre.code .c {
+            color: #9b8ec4;
+            font-style: italic;
+        }
+
+        /* comentário */
+        .saida-label {
+            font-family: 'Lexend', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--eyebrow);
+            margin: 16px 0 0;
+        }
+
+        /* checklist */
+        ul.check {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.check li {
+            display: grid;
+            grid-template-columns: 26px 1fr;
+            gap: 12px;
+            align-items: start;
+            padding: 11px 0;
+            border-bottom: 1px solid var(--borda-suave);
+            color: var(--tinta);
+            max-width: 68ch;
+        }
+
+        ul.check li:last-child {
+            border-bottom: none;
+        }
+
+        ul.check .box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--acento);
+            border-radius: 5px;
+            margin-top: 3px;
+        }
+
+        /* regras (callout) */
+        .regras {
+            background: var(--creme);
+            border: 1px solid var(--borda);
+        }
+
+        .regras ul.lista li {
+            font-size: 16px;
+        }
+
+        .rodape {
+            text-align: center;
+            font-family: 'Lexend', sans-serif;
+            font-size: 12px;
+            color: var(--eyebrow);
+            margin-top: 36px;
+            letter-spacing: .03em;
+        }
+
+        @media (max-width:560px) {
+            body {
+                padding: 32px 14px 60px;
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 26px 22px;
+            }
+
+            .titulo {
+                font-size: 31px;
+            }
+
+            .etapa {
+                grid-template-columns: 38px 1fr;
+                gap: 14px;
+            }
+
+            .etapa .num {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <header>
+            <p class="eyebrow">Atividade Prática · JavaScript</p>
+            <h1 class="titulo">Catálogo da Loja de Games</h1>
+            <p class="subtitulo">Você foi contratado para construir o núcleo de dados de um catálogo. Sem telas e sem
+                internet — tudo roda no console. O que importa é modelar bem os dados com <strong>objetos</strong>.</p>
+            <div class="meta">
+                <span>Unidade Curricular <b>Desenvolvimento de Sistemas</b></span>
+                <span>Módulo <b>4 — JavaScript</b></span>
+                <span>Stack <b>JavaScript puro (console)</b></span>
+                <span>Entrega <b>individual ou em dupla</b></span>
+            </div>
+        </header>
+
+        <section class="card cenario">
+            <p class="cliente">PROJETO: Loja de Games Pixel Play</p>
+            <p>A <strong>Pixel Play</strong> é uma loja de games que está informatizando o catálogo. Antes de construir
+                telas, você precisa entregar o <strong>núcleo de dados</strong>: cada jogo do catálogo precisa virar um
+                <strong>objeto</strong> que carrega suas próprias informações <strong>e sabe se descrever e decidir
+                    sozinho</strong> (usando <code class="inl">this</code>).</p>
+            <p>Em cima desses objetos, o gerente quer alguns relatórios rápidos no console: o que está disponível,
+                quantas unidades existem no estoque e quantos jogos há de cada gênero. Trate o código como um sistema,
+                não como um rascunho de variáveis soltas.</p>
+        </section>
+
+        <section class="card">
+            <h2>Objetivo</h2>
+            <p>Construir, em JavaScript puro, um <strong>catálogo de jogos</strong> em que <strong>cada jogo é um
+                    objeto</strong> com propriedades e <strong>métodos que usam <code class="inl">this</code></strong>,
+                e gerar relatórios percorrendo e transformando a lista. Todos os itens abaixo são
+                <strong>obrigatórios</strong> e serão verificados na entrega:</p>
+            <div class="badges">
+                <span class="badge">objeto (chave: valor)</span>
+                <span class="badge">propriedades</span>
+                <span class="badge">acesso ponto e colchete</span>
+                <span class="badge">método + this</span>
+                <span class="badge">array de objetos</span>
+                <span class="badge">forEach</span>
+                <span class="badge">map / filter / reduce</span>
+                <span class="badge">for..in</span>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>O que o programa precisa ter</h2>
+            <ul class="lista">
+                <li><strong>Pelo menos 3 jogos</strong>, cada um como objeto, guardados em <strong>um array</strong>
+                    (<code class="inl">catalogo</code>).</li>
+                <li>Cada jogo com, no mínimo: <code class="inl">titulo</code>, <code class="inl">preco</code>, <code
+                        class="inl">genero</code>, <code class="inl">unidades</code>, <code class="inl">lancado</code> e
+                    <code class="inl">plataformas</code>.</li>
+                <li><strong>Métodos de objeto</strong> que usam <code class="inl">this</code> para falar dos próprios
+                    dados.</li>
+                <li><strong>Relatórios no console</strong>: listagem numerada, jogos por gênero e totais — sempre
+                    percorrendo ou transformando a lista.</li>
+                <li>Código organizado em <strong>funções pequenas</strong>, sem <code class="inl">var</code>.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>O formato de cada jogo</h2>
+            <p>Cada jogo do catálogo é um <strong>objeto</strong> com estas propriedades. Você define os valores; os
+                <strong>métodos</strong> você cria ao longo das etapas.</p>
+            <pre class="code">const jogo = {
+  titulo: "...",        <span class="c">// texto</span>
+  preco: 0,             <span class="c">// número</span>
+  genero: "...",        <span class="c">// texto</span>
+  unidades: 0,          <span class="c">// número (quantos há em estoque)</span>
+  lancado: true,        <span class="c">// booleano (já está à venda?)</span>
+  plataformas: ["..."]  <span class="c">// lista (array) de textos</span>
+  <span class="c">// + os métodos da Etapa 2 entram aqui dentro</span>
+};</pre>
+        </section>
+
+        <section class="card">
+            <h2><span class="n">Etapas</span> do desenvolvimento</h2>
+
+            <div class="etapa">
+                <div class="num">1</div>
+                <div class="min">
+                    <h3>Criar o objeto e acessar propriedades</h3>
+                    <p>Crie um objeto chamado <code class="inl">jogo</code> com as 6 propriedades do formato acima. A
+                        propriedade <code class="inl">plataformas</code> é uma <strong>lista de textos</strong> (ex.:
+                        <code class="inl">["PC", "PS5", "Xbox"]</code>).</p>
+                    <p>Depois imprima, nesta ordem: o <code class="inl">titulo</code> usando <strong>ponto</strong>, o
+                        <code class="inl">genero</code> usando <strong>colchete</strong>, e a <strong>primeira
+                            plataforma</strong> da lista.</p>
+                    <p class="saida-label">Exemplo de saída (se o jogo for o Elden Ring)</p>
+                    <pre class="code">Elden Ring
+RPG
+PC</pre>
+                    <div class="badges">
+                        <span class="badge">objeto</span>
+                        <span class="badge">propriedades</span>
+                        <span class="badge">acesso ponto e colchete</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="etapa">
+                <div class="num">2</div>
+                <div class="min">
+                    <h3>Dar comportamento ao objeto (métodos e this)</h3>
+                    <p>Adicione <strong>dois métodos</strong> ao seu <code class="inl">jogo</code>. Os dois leem os
+                        dados <strong>só por <code class="inl">this</code></strong>.</p>
+                    <p><strong>Método 1 — <code class="inl">statusEstoque()</code></strong> (sem parâmetro): olha <code
+                            class="inl">this.unidades</code> e <strong>decide</strong> o que devolver:</p>
+                    <ul class="lista">
+                        <li><code class="inl">0</code> → devolve <code class="inl">"Esgotado"</code></li>
+                        <li>de <code class="inl">1</code> a <code class="inl">3</code> → devolve <code
+                                class="inl">"Últimas unidades"</code></li>
+                        <li><code class="inl">4</code> ou mais → devolve <code class="inl">"Disponível"</code></li>
+                    </ul>
+                    <p><strong>Método 2 — <code class="inl">cabeNoOrcamento(valor)</code></strong> (com parâmetro):
+                        devolve <code class="inl">true</code> se <code class="inl">this.preco</code> for <strong>menor
+                            ou igual</strong> a <code class="inl">valor</code>, senão <code class="inl">false</code>.
+                    </p>
+                    <p class="saida-label">Exemplo de saída (com unidades: 5 e preco: 199.9)</p>
+                    <pre class="code">Disponível
+true
+false</pre>
+                    <div class="badges">
+                        <span class="badge">método + this</span>
+                        <span class="badge">parâmetro</span>
+                        <span class="badge">return</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="etapa">
+                <div class="num">3</div>
+                <div class="min">
+                    <h3>Montar a lista e mexer nas pontas</h3>
+                    <p>Crie <strong>3 jogos completos</strong> (mesmo formato, todos com os dois métodos da Etapa 2).
+                        Varie <code class="inl">genero</code>, <code class="inl">preco</code> e <code
+                            class="inl">unidades</code> entre eles. Monte o array <code class="inl">catalogo</code> com
+                        esses 3 jogos.</p>
+                    <p>Depois aplique <strong>nesta ordem</strong>:</p>
+                    <ul class="lista">
+                        <li>um jogo novo chega e entra <strong>no fim</strong> da lista;</li>
+                        <li>o jogo que está <strong>no começo</strong> saiu de linha — remova-o;</li>
+                        <li>um <strong>lançamento em destaque</strong> chega e entra <strong>no começo</strong>.</li>
+                    </ul>
+                    <p>No fim, imprima quantos jogos sobraram (<code class="inl">catalogo.length</code>).</p>
+                    <div class="badges">
+                        <span class="badge">array de objetos</span>
+                        <span class="badge">push</span>
+                        <span class="badge">shift</span>
+                        <span class="badge">unshift</span>
+                        <span class="badge">.length</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="etapa">
+                <div class="num">4</div>
+                <div class="min">
+                    <h3>Listar o catálogo</h3>
+                    <p>Crie a função <code class="inl">listarCatalogo(jogos)</code> que percorre o <code
+                            class="inl">catalogo</code> com <strong><code class="inl">forEach</code></strong> e imprime
+                        cada jogo <strong>numerado a partir de 1</strong>, mostrando o status de estoque (use o método
+                        <code class="inl">statusEstoque()</code> da Etapa 2).</p>
+                    <p>O <code class="inl">forEach</code> entrega o item <strong>e o índice</strong> — use o índice para
+                        numerar (<code class="inl">indice + 1</code>).</p>
+                    <p class="saida-label">Formato da saída</p>
+                    <pre class="code">1 - Elden Ring (Disponível)
+2 - Hades (Últimas unidades)
+3 - Forza Horizon (Esgotado)</pre>
+                    <div class="badges">
+                        <span class="badge">forEach</span>
+                        <span class="badge">índice</span>
+                        <span class="badge">método do objeto</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="etapa">
+                <div class="num">5</div>
+                <div class="min">
+                    <h3>Relatórios com filter, map e reduce</h3>
+                    <p>Sobre o <code class="inl">catalogo</code>, gere <strong>três relatórios</strong>, cada um em sua
+                        própria variável:</p>
+                    <ul class="lista">
+                        <li><strong><code class="inl">filter</code> + <code class="inl">map</code>:</strong> filtre só
+                            os jogos de um gênero (ex.: <code class="inl">"RPG"</code>) e transforme esse resultado numa
+                            lista só com os <code class="inl">titulo</code>. <span style="color:var(--eyebrow);">Ex.:
+                                ["Elden Ring", "Dark Souls"]</span></li>
+                        <li><strong><code class="inl">reduce</code> de soma:</strong> some o total de <code
+                                class="inl">unidades</code> em estoque de todos os jogos.</li>
+                        <li><strong><code class="inl">reduce</code> de comparação:</strong> descubra o <strong>jogo mais
+                                caro</strong> e imprima o <code class="inl">titulo</code> dele.</li>
+                    </ul>
+                    <div class="badges">
+                        <span class="badge">filter</span>
+                        <span class="badge">map</span>
+                        <span class="badge">reduce</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="etapa">
+                <div class="num">6</div>
+                <div class="min">
+                    <h3>Desafio: contar jogos por gênero</h3>
+                    <p>Descubra <strong>quantos jogos há por gênero</strong> — sem saber os gêneros de antemão.</p>
+                    <ul class="lista">
+                        <li>Crie um objeto vazio <code class="inl">contagemGenero = {}</code>.</li>
+                        <li>Percorra o <code class="inl">catalogo</code>; para cada jogo, some 1 na chave do gênero
+                            dele. Se a chave ainda não existir, comece em 0 antes de somar. <strong>O acesso é por
+                                colchete</strong> (<code class="inl">contagemGenero[j.genero]</code>), porque a chave
+                            vem de uma variável.</li>
+                        <li>Percorra <code class="inl">contagemGenero</code> com <strong><code
+                                    class="inl">for..in</code></strong> e imprima cada gênero com a contagem.</li>
+                    </ul>
+                    <p class="saida-label">Formato da saída</p>
+                    <pre class="code">RPG: 2
+Roguelike: 1
+Corrida: 1</pre>
+                    <div class="badges">
+                        <span class="badge">objeto como contador</span>
+                        <span class="badge">chave dinâmica [ ]</span>
+                        <span class="badge">for..in</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Checklist de entrega</h2>
+            <ul class="check">
+                <li><span class="box"></span><span>Objeto <code class="inl">jogo</code> com propriedade que é um
+                        <strong>array</strong> (<code class="inl">plataformas</code>) e acesso a um item dela.</span>
+                </li>
+                <li><span class="box"></span><span>Leitura de propriedade <strong>por ponto e por
+                            colchete</strong>.</span></li>
+                <li><span class="box"></span><span>Método de <strong>decisão</strong> (<code
+                            class="inl">statusEstoque</code>) e método que devolve <strong>true/false</strong> (<code
+                            class="inl">cabeNoOrcamento</code>), ambos com <code class="inl">this</code>.</span></li>
+                <li><span class="box"></span><span>Array <code class="inl">catalogo</code> manipulado nas <strong>duas
+                            pontas + remoção</strong> (push, shift, unshift) e uso de <code
+                            class="inl">.length</code>.</span></li>
+                <li><span class="box"></span><span>Listagem <strong>numerada</strong> com <code
+                            class="inl">forEach</code> + índice.</span></li>
+                <li><span class="box"></span><span>Relatórios com <strong>filter, map e reduce</strong> (um de
+                        cada).</span></li>
+                <li><span class="box"></span><span>Objeto <strong>contador por gênero</strong> com chave dinâmica +
+                        <code class="inl">for..in</code>.</span></li>
+                <li><span class="box"></span><span>Código sem <code class="inl">var</code>, organizado em funções
+                        pequenas.</span></li>
+            </ul>
+        </section>
+
+        <section class="card regras">
+            <h2>Regras importantes</h2>
+            <ul class="lista">
+                <li>Use <code class="inl">let</code>/<code class="inl">const</code>, <strong>nunca <code
+                            class="inl">var</code></strong>.</li>
+                <li>Cada jogo é um <strong>objeto literal</strong> <code class="inl">{ }</code> — nada de <code
+                        class="inl">class</code> (POO vem depois).</li>
+                <li>Os métodos leem os dados <strong>só via <code class="inl">this</code></strong> — o objeto se vira
+                    sozinho, não depende de variável de fora.</li>
+                <li>Cada função tem <strong>uma responsabilidade</strong> e devolve o resultado com <code
+                        class="inl">return</code> (o <code class="inl">console.log</code> fica com quem chama).</li>
+                <li>Fase <strong>JavaScript puro no console</strong>: sem <code class="inl">fetch</code>, <code
+                        class="inl">JSON</code>, <code class="inl">localStorage</code> ou desestruturação.</li>
+            </ul>
+        </section>
+
+        <p class="rodape">Loja de Games Pixel Play · Atividade Prática — Desenvolvimento de Sistemas · SENAI</p>
+
+    </div>
+</body>
+
+</html>

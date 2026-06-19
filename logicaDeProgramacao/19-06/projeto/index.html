@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Play - Catálogo Cute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="modo-cute">
+    <header class="topo">
+        <button id="botaoTema" class="botao-tema" type="button">Modo normal</button>
+        <p>Pixel Play Store</p>
+        <h1>Catálogo Cute de Games</h1>
+        <span>Jogos, estoque e relatórios em JavaScript, com um toque Hello Kitty.</span>
+    </header>
+
+    <main>
+        <section class="painel" aria-label="Resumo do catálogo">
+            <div>
+                <strong id="totalJogos">0</strong>
+                <span>jogos no catálogo</span>
+            </div>
+            <div>
+                <strong id="totalEstoque">0</strong>
+                <span>unidades em estoque</span>
+            </div>
+            <div>
+                <strong id="jogoMaisCaro">-</strong>
+                <span>jogo mais caro</span>
+            </div>
+            <div>
+                <strong id="totalGeneros">0</strong>
+                <span>gêneros diferentes</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Jogos disponíveis</h2>
+            <div id="catalogo" class="catalogo"></div>
+        </section>
+
+        <section class="relatorios">
+            <article>
+                <h2>Jogos de RPG</h2>
+                <ul id="listaRpg"></ul>
+            </article>
+            <article>
+                <h2>Jogos por genero</h2>
+                <ul id="contagemGenero"></ul>
+            </article>
+        </section>
+    </main>
+
+    <script src="atv.js"></script>
+</body>
+
+</html>
+
+
+
+

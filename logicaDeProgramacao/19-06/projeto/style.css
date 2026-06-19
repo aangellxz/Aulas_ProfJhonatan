@@ -1,0 +1,503 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Nunito", Arial, sans-serif;
+    color: #473149;
+    padding: 34px 18px 58px;
+    background:
+        radial-gradient(circle at 12% 16%, rgba(255, 184, 218, 0.72) 0 90px, transparent 92px),
+        radial-gradient(circle at 88% 10%, rgba(178, 224, 255, 0.74) 0 110px, transparent 112px),
+        radial-gradient(circle at 82% 82%, rgba(207, 190, 255, 0.68) 0 120px, transparent 122px),
+        linear-gradient(135deg, #fff0f7, #edf7ff 48%, #f8f1ff);
+}
+
+body::before,
+body::after {
+    position: fixed;
+    z-index: -1;
+    font-size: 4rem;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+body::before {
+    content: "♡";
+    top: 26px;
+    left: 28px;
+    color: #ff7eb6;
+}
+
+body::after {
+    content: "☆";
+    right: 36px;
+    bottom: 28px;
+    color: #8e7cff;
+}
+
+.topo {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    padding: 34px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #ff8fc8, #b99cff 52%, #7cc8ff);
+    color: white;
+    border: 5px solid rgba(255, 255, 255, 0.76);
+    box-shadow: 0 18px 44px rgba(178, 120, 202, 0.28);
+    position: relative;
+    overflow: hidden;
+}
+
+.botao-tema {
+    position: absolute;
+    right: 24px;
+    top: 22px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    color: white;
+    font-family: "Nunito", Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(100, 60, 120, 0.16);
+}
+
+.botao-tema:hover {
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.topo p {
+    color: #fff7fb;
+    font-size: 0.84rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.topo h1 {
+    font-family: "Baloo 2", cursive;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 0.95;
+    margin-bottom: 10px;
+    text-shadow: 0 5px 0 rgba(110, 55, 126, 0.18);
+}
+
+.topo span {
+    display: block;
+    max-width: 660px;
+    color: #fffafd;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.painel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.painel div,
+.relatorios article,
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 3px solid #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 14px 30px rgba(135, 95, 150, 0.16);
+}
+
+.painel div {
+    padding: 22px;
+    position: relative;
+}
+
+.painel div::after {
+    content: "♡";
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    color: #ffc0dc;
+    font-size: 1.5rem;
+}
+
+.painel strong {
+    display: block;
+    font-family: "Baloo 2", cursive;
+    font-size: 2rem;
+    line-height: 1;
+    color: #ff5fa8;
+    margin-bottom: 6px;
+}
+
+.painel span {
+    color: #735a76;
+    font-size: 0.96rem;
+    font-weight: 700;
+}
+
+section h2 {
+    font-family: "Baloo 2", cursive;
+    font-size: 1.8rem;
+    color: #5d3f68;
+    margin-bottom: 12px;
+}
+
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.card {
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-7px) rotate(-0.5deg);
+    box-shadow: 0 18px 34px rgba(135, 95, 150, 0.24);
+}
+
+.card-cabecalho {
+    min-height: 118px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ff79b8, #9c8cff 55%, #70caff);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-cabecalho h3 {
+    font-family: "Baloo 2", cursive;
+    font-size: 1.75rem;
+    line-height: 1.02;
+    text-shadow: 0 3px 0 rgba(104, 58, 112, 0.18);
+}
+
+.card-cabecalho span {
+    width: fit-content;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.32);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.card-corpo {
+    padding: 20px;
+}
+
+.card-corpo p {
+    margin-bottom: 10px;
+    color: #614d65;
+    font-weight: 700;
+}
+
+.card-corpo strong {
+    color: #32223a;
+}
+
+.status {
+    display: inline-block;
+    margin: 7px 0 14px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    font-weight: 900;
+    border: 2px solid transparent;
+}
+
+.status-disponivel {
+    background: #dffbea;
+    color: #137547;
+    border-color: #b7f0cf;
+}
+
+.status-ultimas {
+    background: #fff1c8;
+    color: #9a5b00;
+    border-color: #ffe199;
+}
+
+.status-esgotado {
+    background: #ffe1e8;
+    color: #b4234a;
+    border-color: #ffc0cf;
+}
+
+.plataformas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.plataformas span {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #efe9ff;
+    color: #6b4fc4;
+    font-size: 0.82rem;
+    font-weight: 900;
+    border: 2px solid #ffffff;
+}
+
+.relatorios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.relatorios article {
+    padding: 22px;
+}
+
+.relatorios ul {
+    list-style: none;
+}
+
+.relatorios li {
+    padding: 11px 0;
+    border-bottom: 2px dashed #f4c9df;
+    color: #614d65;
+    font-weight: 800;
+}
+
+.relatorios li::before {
+    content: "♡ ";
+    color: #ff70ad;
+}
+
+.relatorios li:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 720px) {
+    body {
+        padding: 20px 12px 40px;
+    }
+
+    .topo {
+        padding: 26px;
+    }
+
+    .botao-tema {
+        position: static;
+        margin-bottom: 16px;
+    }
+
+    .painel,
+    .relatorios {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modo normal */
+body.modo-normal {
+    font-family: "Nunito", Arial, sans-serif;
+    color: #162033;
+    background: #f4f7fb;
+}
+
+body.modo-normal::before,
+body.modo-normal::after {
+    content: "";
+}
+
+body.modo-normal .topo {
+    border-radius: 8px;
+    background: #101828;
+    border: 0;
+    border-left: 8px solid #2dd4bf;
+    box-shadow: none;
+}
+
+body.modo-normal .topo p {
+    color: #2dd4bf;
+}
+
+body.modo-normal .topo h1 {
+    font-family: "Nunito", Arial, sans-serif;
+    text-shadow: none;
+}
+
+body.modo-normal .topo span {
+    color: #cbd5e1;
+}
+
+body.modo-normal .botao-tema {
+    background: #2dd4bf;
+    color: #0f172a;
+    box-shadow: none;
+}
+
+body.modo-normal .painel div,
+body.modo-normal .relatorios article,
+body.modo-normal .card {
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+body.modo-normal .painel div::after {
+    content: "";
+}
+
+body.modo-normal .painel strong {
+    font-family: "Nunito", Arial, sans-serif;
+    color: #0f766e;
+}
+
+body.modo-normal section h2 {
+    font-family: "Nunito", Arial, sans-serif;
+    color: #162033;
+}
+
+body.modo-normal .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+}
+
+body.modo-normal .card-cabecalho {
+    background: linear-gradient(135deg, #0f172a, #2563eb);
+}
+
+body.modo-normal .card-cabecalho h3 {
+    font-family: "Nunito", Arial, sans-serif;
+    text-shadow: none;
+}
+
+body.modo-normal .status {
+    border-radius: 6px;
+}
+
+body.modo-normal .plataformas span {
+    border-radius: 6px;
+    background: #eef2ff;
+    border: 0;
+    color: #3730a3;
+}
+
+body.modo-normal .relatorios li {
+    border-bottom: 1px solid #e5e7eb;
+    color: #475467;
+}
+
+body.modo-normal .relatorios li::before {
+    content: "";
+}
+
+body.modo-normal .status-disponivel {
+    background: #ccfbf1;
+    border-color: transparent;
+    color: #115e59;
+}
+
+body.modo-normal .status-ultimas {
+    background: #fef3c7;
+    border-color: transparent;
+    color: #92400e;
+}
+
+body.modo-normal .status-esgotado {
+    background: #fee2e2;
+    border-color: transparent;
+    color: #991b1b;
+}
+
+@media (max-width: 900px) {
+    .painel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Detalhes Hello Kitty do modo cute */
+body.modo-cute .topo::before {
+    content: "Hello Kitty mood";
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+}
+
+body.modo-cute .topo h1::after {
+    content: "  🎀";
+    font-size: 0.55em;
+    vertical-align: middle;
+}
+
+body.modo-cute .card-cabecalho {
+    position: relative;
+    background: linear-gradient(135deg, #ff6fae, #ff9ac9 42%, #b8dcff);
+}
+
+body.modo-cute .card-cabecalho::after {
+    content: "🎀";
+    position: absolute;
+    right: 16px;
+    top: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.36);
+    box-shadow: 0 6px 16px rgba(160, 60, 120, 0.18);
+}
+
+body.modo-cute .card:nth-child(2n) .card-cabecalho {
+    background: linear-gradient(135deg, #ff8abb, #ffc2df 45%, #a8d8ff);
+}
+
+body.modo-cute .painel div::after {
+    content: "🎀";
+    font-size: 1.25rem;
+}
+
+body.modo-cute .relatorios article::before {
+    content: "♡ Hello Kitty vibes";
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #ffe1ef;
+    color: #c02670;
+    font-size: 0.78rem;
+    font-weight: 900;
+}
+
+body.modo-normal .topo::before,
+body.modo-normal .topo h1::after,
+body.modo-normal .card-cabecalho::after,
+body.modo-normal .relatorios article::before {
+    content: none;
+}
+
+@media (max-width: 720px) {
+    body.modo-cute .topo::before {
+        position: static;
+        display: inline-block;
+        margin-top: 14px;
+    }
+}
