@@ -74,5 +74,10 @@ for (let i = 0; i < blocos.length, i++){
     console.log(`Bloco ${blocos[i]}: ${salas[i]}`);
 };
 
-const {cursos} = 
-
+const bibloteca = {
+    livro : [
+    { titulo : "Mágico de oz!"}, 
+    }
+    ]
+   
+}
