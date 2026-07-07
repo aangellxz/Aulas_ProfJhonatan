@@ -14,12 +14,16 @@ console.log(kmParaMetros());
 
 
 
-export default function celsiusParaFahrenheit(... c){
-    let f =  (c * 1,8) + 32;
+export default function celsiusParaFahrenheit(c){
+    let f =  (c * 1.8) + 32;
     return f;
 };
 console.log(celsiusParaFahrenheit(30));
 
 
 
-function horasParaMinutos(){};
+export function horasParaMinutos(h){
+   let min = h * 60;
+   return min;
+}; 
+console.log(horasParaMinutos(1));
